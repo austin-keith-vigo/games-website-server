@@ -2,14 +2,16 @@ var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
-var users = [];
-var connections = [];
 
+var users = [];         // list of all the users
+var connections = [];   // list of all the sockets 
+
+// Open server on port 5000
 server.listen(5000);
 console.log('Server running...');
 
+// Open express app
 app.get('/', function(request, response){
-
     // Simple html for the express app
     response.sendFile(__dirname + '/index.html');
 });
@@ -36,6 +38,7 @@ io.sockets.on('connection', function(socket) {
             return '_' + Math.random().toString(36).substr(2, 9);
             };
         var username = ID();
+        users.push(username);
         console.log("%s has connected", username);
         socket.emit('getUsername', {username: username});
     })
