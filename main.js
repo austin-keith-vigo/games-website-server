@@ -36,7 +36,7 @@ io.sockets.on('connection', function(socket) {
             return '_' + Math.random().toString(36).substr(2, 9);
             };
         var username = ID();
-        console.log(username);
+        console.log("%s has connected", username);
         socket.emit('getUsername', {username: username});
     })
 });
