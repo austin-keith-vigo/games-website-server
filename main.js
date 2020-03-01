@@ -18,6 +18,26 @@ app.get('/', function(request, response){
 io.sockets.on('connection', function(socket) {
     connections.push(socket);
     console.log('Connections: %s sockets connected', connections.length);
+    var ID = function () {
+        // Math.random should be unique because of its seeding algorithm.
+        // Convert it to base 36 (numbers + letters), and grab the first 9 characters
+        // after the decimal.
+        return '_' + Math.random().toString(36).substr(2, 9);
+        };
+    var username = ID();
+    users.push(username);
 
+    // Generate a username for the user and sends it to the sender
+    socket.on('newUser', function(data){
+        var ID = function () {
+            // Math.random should be unique because of its seeding algorithm.
+            // Convert it to base 36 (numbers + letters), and grab the first 9 characters
+            // after the decimal.
+            return '_' + Math.random().toString(36).substr(2, 9);
+            };
+        var username = ID();
+        console.log(username);
+        socket.emit('getUsername', {username: username});
+    })
 });
 
