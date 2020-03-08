@@ -13,6 +13,23 @@ module.exports = class TicTacToe {
             }
         }
     }
+    /*
+    Class Methods
+    */
+
+    // Current player marks this spot.
+    // Error handling should be done by the client
+    move(row, col) {
+        this.board[row][col] = this.currentPlayerTurn;
+        if(this.currentPlayerTurn == 1) {
+            this.currentPlayerTurn = 2;
+        }
+        else {
+            this.currentPlayerTurn = 1;
+        }
+
+        // Check if their is a winner
+    }
 
     /*
     Accessors
@@ -27,7 +44,7 @@ module.exports = class TicTacToe {
         return this.board;
     }
     getTurn() {
-        return this.currentPlayerTurn;
+        return this.currentPlayerTurn.toString();
     }
     getPosition(row,col) {
         return this.board[row][col];
@@ -38,9 +55,7 @@ module.exports = class TicTacToe {
             for(var col = 0; col < this.width; ++col) {
                 str += this.board[row][col];
             }
-            str += '\n';
         }
-        str = str.substring(0,str.length - 1);
         return str;
     }
 

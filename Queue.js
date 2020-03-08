@@ -6,17 +6,24 @@ module.exports = class Queue {
 
     enqueue(item) {
         this.list.push(item);
-        this.length -= 1;
+        this.length += 1;
     }
 
     dequeue() {
         // do not deque if empty
         if( this.length == 0 ) {
-            return;
+            return null;
         }
 
         var item = this.list[0];
         this.list = this.list.slice(1, this.list.length);
+        this.length -= 1;
         return item;
     }
+
+    size() {
+        return this.length;
+    }
+
+
 }
